@@ -9,8 +9,6 @@ categories:
   - general
 ---
 
-> _Photo by [Greg](__GHOST_URL__/author/greg/)_
-
 The window of intrigue  
 opening to a new world its colours  
 denote sky water and earth.

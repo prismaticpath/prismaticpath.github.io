@@ -17,4 +17,4 @@ If you doubt you have incredible intellectual powers, then Stark Thinking has go
 
 Replace stark with multi colours, replace stark people with vibrant personalities, replace stark results with your goals for success.
 
-{{< figure src="__GHOST_URL__/content/images/2021/07/Stark-Thinking-.JPG" >}}
+![Stark Thinking](../../assets/images/2021/07/Stark-Thinking-.JPG)

@@ -15,4 +15,4 @@ Fluffy and light can also mean whimsical, a unique point of view and able to lau
 
 Fluffy and light will assuredly open your mind to new possibilities especially when current morales fail miserably.
 
-{{< figure src="__GHOST_URL__/content/images/2021/07/-Fluffy-.jpg" >}}
+![Fluffy](../../assets/images/2021/07/-Fluffy-.jpg)

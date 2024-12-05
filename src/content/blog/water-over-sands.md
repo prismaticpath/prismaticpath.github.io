@@ -9,8 +9,6 @@ categories:
   - general
 ---
 
-> _Photo by [Greg](__GHOST_URL__/author/greg/)_
-
 Water over sands  
 cleansing the footprints of time
 

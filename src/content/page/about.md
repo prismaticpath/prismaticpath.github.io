@@ -12,4 +12,4 @@ Prismatic Path is a collaboration between [Chris Tham](__GHOST_URL__/author/chri
 
 This site is written in [Astro](https://astro.build), using the [Astro Blog](https://github.com/ChristineTham/astro-blog) starter, and hosted on Github Pages.
 
-{{< figure src="__GHOST_URL__/content/images/2020/08/spectrum.svg" caption="Prismatic Path Logo" >}}
+![Prismatic Path Logo](../../assets/images/2020/08/spectrum.svg)
