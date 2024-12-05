@@ -1,0 +1,94 @@
+---
+import { Image } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
+import { getEntry } from 'astro:content'
+import Base from '../layouts/base.astro'
+import NextPrev from '../components/nextprev.astro'
+
+export interface Props {
+  post: CollectionEntry<'blog'>
+  prev?: CollectionEntry<'blog'>
+  next?: CollectionEntry<'blog'>
+}
+
+const { post, prev, next } = Astro.props
+let author = await getEntry('author', 'default')
+if (post.data.author) {
+  author = await getEntry(post.data.author)
+}
+---
+
+<Base frontmatter={post.data}>
+  <main class='dark:bg-black'>
+    <article class='post'>
+      <header class='body-font text-gray-600'>
+        <div class='mx-auto flex flex-col items-center justify-center px-5 py-6 container'>
+          <div class='w-full text-center lg:w-2/3'>
+            <h1
+              class='title-font mb-4 text-4xl text-gray-900 font-medium sm:text-4xl dark:text-gray-200'
+            >
+              {post.data.title}
+            </h1>
+            <p class='mb-8 leading-relaxed'>{post.data.description}</p>
+          </div>
+          {
+            post.data.image && (
+              <Image
+                class='mb-10 w-5/6 rounded object-contain object-center lg:w-3/6 xl:w-2/6'
+                alt='hero'
+                src={post.data.image}
+              />
+            )
+          }
+          <span class='flex'>
+            {
+              post.data.author && (
+                <span class='mr-6 flex items-center'>
+                  <Image
+                    src={author.data.image}
+                    alt={author.data.title}
+                    class='mr-2 h-10 w-10 rounded-full object-cover'
+                  />
+                  <span class='text-purple-500 font-semibold dark:text-purple-300'>
+                    {author.data.title}
+                  </span>
+                </span>
+              )
+            }
+            {
+              post.data.pubDate && (
+                <span class='mr-6 flex items-center'>
+                  <div class='i-heroicons-calendar-days mr-1 h-6 w-6 text-purple-500 dark:text-purple-300' />
+                  <span class='ml-1 text-purple-500 font-semibold dark:text-purple-300'>
+                    {new Date(post.data.pubDate).toDateString()}
+                  </span>
+                </span>
+              )
+            }
+            {
+              post.data.minutesRead && (
+                <span class='flex items-center'>
+                  <div class='i-heroicons-clock mr-1 h-6 w-6 text-purple-500 dark:text-purple-300' />
+                  <span class='ml-1 text-purple-500 font-semibold dark:text-purple-300'>
+                    {post.data.minutesRead}
+                  </span>
+                </span>
+              )
+            }
+          </span>
+        </div>
+      </header>
+      <section
+        class='lg:prose-3xl mx-auto max-w-screen-lg px-4 prose prose-gray lg:px-0 dark:prose-invert'
+      >
+        <slot />
+      </section>
+    </article>
+  </main>
+  <NextPrev
+    slot='before-footer'
+    base={`${import.meta.env.BASE_URL}` + 'blog/'}
+    prev={prev}
+    next={next}
+  />
+</Base>
