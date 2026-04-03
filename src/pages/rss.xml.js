@@ -28,7 +28,7 @@ export async function GET(context) {
       posts.map(async (post) => {
         const author = await getEntry(post.data.author)
         return {
-          link: context.site + 'blog/' + post.slug,
+          link: context.site + 'blog/' + post.id,
           title: post.data.title,
           description: post.data.description,
           author: `${author.data.title} (${author.data.contact})`,

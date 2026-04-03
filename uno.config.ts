@@ -2,11 +2,9 @@
 import {
   defineConfig,
   presetIcons,
-  presetAttributify,
   presetTypography,
-  presetUno
+  presetWind4
 } from 'unocss'
-import { presetForms } from '@julr/unocss-preset-forms'
 
 export default defineConfig({
   presets: [
@@ -16,10 +14,12 @@ export default defineConfig({
         'vertical-align': 'middle'
         // ...
       }
-    }),
-    presetAttributify(), // required when using attributify mode
-    presetUno(), // required
-    presetForms(),
+    }),// required when using attributify mode
+    presetWind4({
+      preflights: {
+        reset: true,
+      },
+    }),// required
     presetTypography()
   ],
   safelist: [
