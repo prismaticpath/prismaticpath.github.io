@@ -1,10 +1,15 @@
 ---
 import type { CollectionEntry } from 'astro:content'
+import { ClientRouter } from 'astro:transitions'
 import SEO from '../components/seo.astro'
 import Header from '../components/header.astro'
 import Footer from '../components/footer.astro'
 import Gallery from '../components/gallery.astro'
 import Images from '../components/images.astro'
+import '@fontsource/noto-sans/400.css'
+import '@fontsource/noto-sans/700.css'
+import '@fontsource/noto-serif/400.css'
+import '@fontsource/noto-serif/700.css'
 
 export interface Props {
   frontmatter: CollectionEntry<'page'>['data'] | CollectionEntry<'blog'>['data']
@@ -14,7 +19,7 @@ const { frontmatter } = Astro.props
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="Referrer-Policy" content="no-referrer, strict-origin-when-cross-origin" />
@@ -27,28 +32,19 @@ const { frontmatter } = Astro.props
     <link rel="alternate" type="application/rss+xml" title="RSS" href={`${Astro.site}rss.xml`} />
     <meta name="generator" content={Astro.generator} />
     <SEO frontmatter={frontmatter} />
-    <script is:inline>
-      const setDarkMode = () => {
-        if (
-          localStorage.theme === 'dark' ||
-          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-        ) {
-          document.documentElement.classList.add('dark')
-        } else {
-          document.documentElement.classList.remove('dark')
-        }
-      }
-      setDarkMode() //initial navigation
-      document.addEventListener('astro:after-swap', setDarkMode) // Runs on view transitions navigation
-    </script>
+    <ClientRouter />
     <style is:inline>
       [x-cloak] {
         display: none !important;
       }
+      @keyframes fade-in  { from { opacity: 0 } to { opacity: 1 } }
+      @keyframes fade-out { from { opacity: 1 } to { opacity: 0 } }
+      ::view-transition-old(root) { animation: fade-out 300ms ease }
+      ::view-transition-new(root) { animation: fade-in  300ms ease }
     </style>
     <slot name="in-head" />
   </head>
-  <body class="dark:bg-gray-900">
+  <body class="bg-gray-950 text-white">
     <Header />
     <slot />
     {frontmatter.gallery && <Gallery folder={frontmatter.gallery} />}

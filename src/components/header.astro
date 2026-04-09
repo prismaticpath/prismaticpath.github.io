@@ -1,14 +1,31 @@
 ---
 import { NavigationLinks } from '../config'
 import Search from '../components/search.astro'
-import Theme from '../components/theme.astro'
-import { Logo } from '../config'
 ---
 
+<style>
+  .rainbow-text {
+    background: linear-gradient(90deg, #ff0080, #ff8c00, #ffe100, #00c800, #00bfff, #9b59b6, #ff0080);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow-shift 6s linear infinite;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    font-family: 'Noto Sans', sans-serif;
+  }
+  @keyframes rainbow-shift {
+    0%   { background-position: 0% 50% }
+    100% { background-position: 300% 50% }
+  }
+</style>
+
 <div class="h-16 w-full relative">
-  <nav x-data="{ isOpen: false }" class="dark:bg-gray-800">
+  <nav x-data="{ isOpen: false }" style="background: rgba(10,10,20,0.6); backdrop-filter: blur(12px);">
     <div
-      class="mx-auto px-2 border-b-2 border-purple-300 bg-white w-full fixed z-50 lg:px-8 sm:px-6 dark:border-purple-600 dark:bg-gray-800"
+      class="mx-auto px-2 w-full fixed z-50 lg:px-8 sm:px-6"
+      style="background: rgba(10,10,20,0.6); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.1);"
     >
       <div class="flex h-16 items-center justify-between relative">
         <div class="flex items-center inset-y-0 left-0 absolute lg:hidden">
@@ -16,7 +33,7 @@ import { Logo } from '../config'
           <button
             type="button"
             x-on:click="isOpen = !isOpen"
-            class="text-purple-600 p-2 rounded-md inline-flex items-center justify-center dark:text-purple-300 hover:text-pink-600 focus:outline-none hover:bg-purple-200 focus:ring-2 focus:ring-purple-300 focus:ring-inset dark:hover:text-pink-300 dark:hover:bg-purple-800 dark:focus:ring-purple-800"
+            class="text-purple-300 p-2 rounded-md inline-flex items-center justify-center hover:text-pink-300 focus:outline-none hover:bg-purple-800 focus:ring-2 focus:ring-purple-700 focus:ring-inset"
             aria-controls="mobile-menu"
             aria-expanded="false"
           >
@@ -37,7 +54,9 @@ import { Logo } from '../config'
         </div>
         <div class="flex flex-1 items-center justify-center lg:items-stretch lg:justify-start">
           <div class="flex flex-shrink-0 items-center">
-            <img class="h-8 w-8 block dark:bg-gray-100" src={Logo.src} alt="Logo" />
+            <a href={`${import.meta.env.BASE_URL}`} class="rainbow-text text-xl no-underline">
+              Prismatic Path
+            </a>
           </div>
           <div class="hidden lg:mx-4 lg:block">
             <div class="flex space-x-2">
@@ -47,9 +66,9 @@ import { Logo } from '../config'
                     href={`${import.meta.env.BASE_URL}` + item.href}
                     class={
                       (item.href.length > 0 && Astro.url.toString().includes(item.href)
-                        ? 'bg-purple-200 text-pink-600 dark:bg-purple-800 dark:text-pink-300'
-                        : 'text-purple-600 hover:bg-purple-200 hover:text-pink-600 dark:text-purple-200 dark:hover:bg-purple-800 dark:hover:text-pink-300') +
-                      ' rounded-md px-2 py-2 text-lg font-medium'
+                        ? 'bg-purple-800 text-pink-300'
+                        : 'text-white/80 hover:bg-purple-800 hover:text-white') +
+                      ' rounded-md px-2 py-2 text-lg font-medium transition-colors duration-200'
                     }
                     aria-current={
                       item.href.length > 0 && Astro.url.toString().includes(item.href)
@@ -68,9 +87,6 @@ import { Logo } from '../config'
           class="pr-2 flex items-center inset-y-0 right-0 absolute sm:ml-6 sm:pr-0 sm:inset-auto sm:static"
         >
           <Search />
-          <Theme />
-
-          <!-- Right nav -->
         </div>
       </div>
     </div>
@@ -89,7 +105,8 @@ import { Logo } from '../config'
       id="mobile-menu"
     >
       <div
-        class="font-semibold px-4 py-2 border-b-2 border-t-2 border-purple-300 bg-gray-100 flex justify-center dark:border-purple-600 dark:bg-gray-800"
+        class="font-semibold px-4 py-2 flex justify-center"
+        style="background: rgba(10,10,20,0.9); border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1);"
       >
         {
           NavigationLinks.map((item) => (
@@ -97,9 +114,9 @@ import { Logo } from '../config'
               href={`${import.meta.env.BASE_URL}` + item.href}
               class:list={[
                 item.href.length > 0 && Astro.url.toString().includes(item.href)
-                  ? 'bg-purple-200 text-pink-600 dark:bg-purple-800 dark:text-pink-300'
-                  : 'text-purple-600 hover:bg-purple-200 hover:text-pink-600 dark:text-purple-200 dark:hover:bg-purple-800 dark:hover:text-pink-300',
-                ' px-2'
+                  ? 'bg-purple-800 text-pink-300'
+                  : 'text-white/80 hover:bg-purple-800 hover:text-white',
+                ' px-2 py-1 rounded transition-colors duration-200'
               ]}
               aria-current={
                 item.href.length > 0 && Astro.url.toString().includes(item.href)

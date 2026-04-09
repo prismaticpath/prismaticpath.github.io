@@ -7,6 +7,12 @@ import {
 } from 'unocss'
 
 export default defineConfig({
+  theme: {
+    fontFamily: {
+      sans: ['Noto Sans', 'sans-serif'],
+      serif: ['Noto Serif', 'serif'],
+    }
+  },
   presets: [
     presetIcons({
       extraProperties: {

@@ -21,7 +21,7 @@
       this.idx = lunr.Index.load(data)
     }
     document.getElementById('lunrsearchresults').innerHTML =
-      '<ul class="relative grid gap-6 bg-white dark:bg-gray-700 dark:text-gray-100 px-5 py-6 sm:gap-8 sm:p-8"></ul>'
+      '<ul class="relative grid gap-6 bg-gray-900 text-gray-100 px-5 py-6 sm:gap-8 sm:p-8"></ul>'
     if (term) {
       document.getElementById('lunrsearchtitle').innerHTML =
         "Search results for '" + term + "'"
@@ -33,11 +33,11 @@
           document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML =
             document.querySelectorAll('#lunrsearchresults ul')[0]
               .innerHTML +
-            '<li class="-m-3 p-3 flex items-start rounded-lg hover:bg-purple-200 dark:hover:bg-purple-900"><a href="' +
+            '<li class="-m-3 p-3 flex items-start rounded-lg hover:bg-purple-900"><a href="' +
             url +
-            '"><p class="text-base font-medium text-gray-900 dark:text-gray-100">' +
+            '"><p class="text-base font-medium text-gray-100">' +
             doc.title +
-            '<p><p class="mt-1 text-sm text-gray-500 dark:text-gray-400">' +
+            '<p><p class="mt-1 text-sm text-gray-400">' +
             doc.description +
             '</p></a></li>'
         }
@@ -58,7 +58,7 @@
         <input
           type="search"
           x-model="searchText"
-          class="form-control text-base text-gray-500 font-normal m-0 px-3 py-1.5 border border-purple-300 rounded border-solid bg-white flex-auto max-w-xs min-w-0 w-full block transition ease-in-out relative bg-clip-padding dark:text-gray-300 focus:text-gray-700 focus:outline-none dark:border-purple-700 focus:border-purple-500 dark:bg-gray-900 dark:focus:text-gray-100 dark:focus:border-purple-600"
+          class="form-control text-base text-gray-200 font-normal m-0 px-3 py-1.5 border border-purple-700 rounded border-solid bg-gray-900 flex-auto max-w-xs min-w-0 w-full block transition ease-in-out relative bg-clip-padding focus:text-white focus:outline-none focus:border-purple-500"
           id="lunrsearch"
           name="q"
           maxlength="255"
@@ -148,11 +148,11 @@
             </div>
 
             <div
-              class="py-6 bg-white flex flex-col h-full shadow-xl overflow-y-scroll dark:bg-gray-800"
+              class="py-6 bg-gray-900 flex flex-col h-full shadow-xl overflow-y-scroll"
             >
               <div class="px-4 sm:px-6">
                 <h2
-                  class="text-lg text-gray-900 font-medium dark:text-gray-100"
+                  class="text-lg text-gray-100 font-medium"
                   id="lunrsearchtitle"
                   class="modal-title"
                 >

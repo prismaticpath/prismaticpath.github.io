@@ -13,17 +13,18 @@ const { title, description, image } = Astro.props
 
 <div class="mx-auto h-96 w-full max-w-screen-xl relative md:my-4">
   <div
-    class="h-full w-full bottom-0 left-0 absolute z-10 from-gray-700 bg-gradient-to-t xl:rounded-lg"
+    class="h-full w-full bottom-0 left-0 absolute z-10"
+    style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 100%);"
   >
   </div>
   <Image
     src={image || DefaultImage}
     alt={title}
-    class="h-full w-full left-0 top-0 absolute z-0 object-cover"
+    class="h-full w-full left-0 top-0 absolute z-0 object-cover xl:rounded-lg"
   />
   <div class="p-4 bottom-0 left-0 absolute z-20">
-    <h2 class="text-4xl text-white leading-tight font-bold">{title}</h2>
-    <h2 class="text-xl text-purple-300 font-medium italic">{description}</h2>
+    <h2 class="text-4xl text-white leading-tight font-bold" style="font-family: 'Noto Serif', serif; text-shadow: 0 2px 8px rgba(0,0,0,0.7);">{title}</h2>
+    <h2 class="text-xl text-purple-200 font-medium italic">{description}</h2>
     <slot />
   </div>
 </div>

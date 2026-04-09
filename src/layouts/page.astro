@@ -11,7 +11,7 @@ const { frontmatter } = Astro.props
 ---
 
 <Base {frontmatter}>
-  <main class="dark:bg-gray-900">
+  <main class="bg-gray-950" transition:animate="fade">
     <article class="post">
       <header>
         <PageHero
@@ -21,7 +21,8 @@ const { frontmatter } = Astro.props
         />
       </header>
       <section
-        class="mx-auto my-8 px-4 max-w-screen-lg prose prose-purple lg:px-0 lg:prose-xl dark:prose-invert"
+        class="mx-auto my-8 px-4 max-w-screen-lg prose prose-invert lg:px-0 lg:prose-xl"
+        style="font-family: 'Noto Serif', serif;"
       >
         <slot />
       </section>
