@@ -21,27 +21,27 @@ const authors = await getCollection('author', (a) => {
   <header>
     <PageHero title={frontmatter.title!} description={frontmatter.description} {image} />
   </header>
-  <main class='mt-8 bg-white dark:bg-gray-900'>
-    <div class='mx-auto max-w-7xl px-4 lg:px-8 sm:px-6'>
-      <div class='mx-auto max-w-2xl pb-72 lg:max-w-none lg:pb-24 sm:pb-32'>
-        <div class='grid grid-cols-2 mt-6 gap-x-6 lg:grid-cols-4 md:grid-cols-3 xl:grid-cols-6'>
+  <main class="mt-8 bg-white dark:bg-gray-900">
+    <div class="mx-auto px-4 max-w-7xl lg:px-8 sm:px-6">
+      <div class="mx-auto pb-72 max-w-2xl lg:pb-24 sm:pb-32 lg:max-w-none">
+        <div class="mt-6 gap-x-6 grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 xl:grid-cols-6">
           {
             authors.map((author) => (
-              <div class='group relative flex flex-col justify-center text-center'>
-                <div class='relative mb-4 aspect-square w-full overflow-hidden rounded-full group-hover:opacity-75'>
+              <div class="group text-center flex flex-col justify-center relative">
+                <div class="mb-4 rounded-full w-full aspect-square relative overflow-hidden group-hover:opacity-75">
                   <Image
                     src={author.data.image}
                     alt={author.data.title}
-                    class='h-full w-full object-cover object-center'
+                    class="h-full w-full object-cover object-center"
                   />
                 </div>
-                <h3 class='inline-block rounded bg-purple-600 px-3 py-1 text-xs text-white font-medium tracking-tight uppercase hover:bg-pink-600'>
+                <h3 class="text-xs text-white tracking-tight font-medium px-3 py-1 rounded bg-purple-600 inline-block uppercase hover:bg-pink-600">
                   <a href={`${`${import.meta.env.BASE_URL}`}author/${author.id}/`}>
-                    <span class='absolute inset-0' />
+                    <span class="inset-0 absolute" />
                     {author.data.title}
                   </a>
                 </h3>
-                <p class='text-base text-gray-900 dark:text-gray-400'>{author.data.description}</p>
+                <p class="text-base text-gray-900 dark:text-gray-400">{author.data.description}</p>
               </div>
             ))
           }

@@ -3,7 +3,7 @@ import type { CollectionEntry } from 'astro:content'
 import { getEntries } from 'astro:content'
 
 export interface Props {
-  categories: { collection: 'category', id: string }[]
+  categories: { collection: 'category'; id: string }[]
 }
 
 const { categories } = Astro.props as Props
@@ -12,14 +12,14 @@ const cats = (await getEntries(categories)) as CollectionEntry<'category'>[]
 
 {
   categories && (
-    <div class='flex flex-row flex-wrap items-start gap-2 pb-2'>
+    <div class="pb-2 flex flex-row flex-wrap gap-2 items-start">
       {cats.map((category) => (
         <a
           href={`${`${import.meta.env.BASE_URL}`}category/${encodeURIComponent(category.id)}/`}
-          class='inline-block rounded bg-purple-600 px-3 py-1 text-xs text-white font-medium tracking-tight uppercase hover:bg-pink-600'
+          class="text-xs text-white tracking-tight font-medium px-3 py-1 rounded bg-purple-600 inline-block uppercase hover:bg-pink-600"
         >
           {category.data.title}
-          <span class='sr-only'>category</span>
+          <span class="sr-only">category</span>
         </a>
       ))}
     </div>

@@ -11,19 +11,19 @@ export interface Props {
 const { title, description, image } = Astro.props
 ---
 
-<div class='relative mx-auto h-96 w-full max-w-screen-xl md:my-4'>
+<div class="mx-auto h-96 w-full max-w-screen-xl relative md:my-4">
   <div
-    class='absolute bottom-0 left-0 z-10 h-full w-full from-gray-700 bg-gradient-to-t xl:rounded-lg'
+    class="h-full w-full bottom-0 left-0 absolute z-10 from-gray-700 bg-gradient-to-t xl:rounded-lg"
   >
   </div>
   <Image
     src={image || DefaultImage}
     alt={title}
-    class='absolute left-0 top-0 z-0 h-full w-full object-cover'
+    class="h-full w-full left-0 top-0 absolute z-0 object-cover"
   />
-  <div class='absolute bottom-0 left-0 z-20 p-4'>
-    <h2 class='text-4xl text-white font-bold leading-tight'>{title}</h2>
-    <h2 class='text-xl text-purple-300 font-medium italic'>{description}</h2>
+  <div class="p-4 bottom-0 left-0 absolute z-20">
+    <h2 class="text-4xl text-white leading-tight font-bold">{title}</h2>
+    <h2 class="text-xl text-purple-300 font-medium italic">{description}</h2>
     <slot />
   </div>
 </div>

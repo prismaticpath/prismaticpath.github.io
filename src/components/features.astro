@@ -27,38 +27,38 @@ const features = [
 ]
 ---
 
-<div class='bg-gray-100 py-12 dark:bg-gray-800'>
-  <div class='mx-auto max-w-7xl px-4 lg:px-8 sm:px-6'>
-    <div class='lg:text-center'>
+<div class="py-12 bg-gray-100 dark:bg-gray-800">
+  <div class="mx-auto px-4 max-w-7xl lg:px-8 sm:px-6">
+    <div class="lg:text-center">
       <h2
-        class='text-base text-purple-800 font-semibold tracking-wide uppercase dark:text-purple-300'
+        class="text-base text-purple-800 tracking-wide font-semibold uppercase dark:text-purple-300"
       >
         Features
       </h2>
       <p
-        class='mt-2 text-3xl text-gray-900 font-extrabold leading-8 tracking-tight sm:text-4xl dark:text-gray-100'
+        class="text-3xl text-gray-900 leading-8 tracking-tight font-extrabold mt-2 sm:text-4xl dark:text-gray-100"
       >
         Astro Blog Starter
       </p>
-      <p class='mt-4 max-w-2xl text-xl text-gray-600 lg:mx-auto dark:text-gray-300'>
+      <p class="text-xl text-gray-600 mt-4 max-w-2xl dark:text-gray-300 lg:mx-auto">
         This is a good starting point for a blog, including support for photo galleries.
       </p>
     </div>
 
-    <div class='mt-10'>
-      <dl class='md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10 space-y-10 md:space-y-0'>
+    <div class="mt-10">
+      <dl class="space-y-10 md:gap-x-8 md:gap-y-10 md:grid md:grid-cols-2 md:space-y-0">
         {
           features.map((feature) => (
-            <div class='relative'>
+            <div class="relative">
               <dt>
-                <div class='absolute h-12 w-12 flex items-center justify-center rounded-md bg-purple-500 text-white dark:bg-purple-400 dark:text-black'>
-                  <div class={'h-6 w-6 i-heroicons-' + feature.icon} aria-hidden='true' />
+                <div class="text-white rounded-md bg-purple-500 flex h-12 w-12 items-center justify-center absolute dark:text-black dark:bg-purple-400">
+                  <div class={'h-6 w-6 i-heroicons-' + feature.icon} aria-hidden="true" />
                 </div>
-                <p class='ml-16 text-lg text-gray-900 font-medium leading-6 dark:text-gray-200'>
+                <p class="text-lg text-gray-900 leading-6 font-medium ml-16 dark:text-gray-200">
                   {feature.name}
                 </p>
               </dt>
-              <dd class='ml-16 mt-2 text-base text-gray-600 dark:text-gray-400'>
+              <dd class="text-base text-gray-600 ml-16 mt-2 dark:text-gray-400">
                 {feature.description}
               </dd>
             </div>

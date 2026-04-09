@@ -20,23 +20,23 @@ const social = await getCollection('social')
     <PageHero title={frontmatter.title!} description={frontmatter.description} {image} />
   </header>
   <main>
-    <section class='mx-auto mb-20 max-w-7xl text-gray-800 dark:text-gray-100'>
-      <div class='block bg-white lg:my-8 dark:bg-gray-900'>
-        <div class='flex flex-wrap items-start'>
-          <div class='block w-full shrink-0 grow-0 basis-auto lg:w-6/12 xl:w-4/12 lg:flex'>
-            <div class='w-full'>
-              <Image src={image} alt='cover image' />
+    <section class="text-gray-800 mx-auto mb-20 max-w-7xl dark:text-gray-100">
+      <div class="bg-white block lg:my-8 dark:bg-gray-900">
+        <div class="flex flex-wrap items-start">
+          <div class="shrink-0 grow-0 basis-auto w-full block lg:flex lg:w-6/12 xl:w-4/12">
+            <div class="w-full">
+              <Image src={image} alt="cover image" />
             </div>
           </div>
-          <div class='w-full shrink-0 grow-0 basis-auto lg:w-6/12 xl:w-8/12'>
-            <div class='flex flex-wrap pt-8 lg:pt-0'>
+          <div class="shrink-0 grow-0 basis-auto w-full lg:w-6/12 xl:w-8/12">
+            <div class="pt-8 flex flex-wrap lg:pt-0">
               {
                 social.map(
                   (method) =>
                     method.data.link && (
-                      <div class='mb-12 w-full shrink-0 grow-0 basis-auto px-3 lg:w-full md:w-6/12 xl:w-6/12 md:px-6 xl:px-12'>
-                        <div class='flex items-start'>
-                          <div class='shrink-0'>
+                      <div class="mb-12 px-3 shrink-0 grow-0 basis-auto w-full md:px-6 xl:px-12 lg:w-full md:w-6/12 xl:w-6/12">
+                        <div class="flex items-start">
+                          <div class="shrink-0">
                             <div
                               class={
                                 'h-14 w-14 flex items-center justify-center rounded-md bg-purple-600 p-4 text-white shadow-md i-bi-' +
@@ -44,13 +44,13 @@ const social = await getCollection('social')
                               }
                             />
                           </div>
-                          <div class='ml-6 grow'>
-                            <p class='mb-1 font-bold'>{method.data.name}</p>
+                          <div class="ml-6 grow">
+                            <p class="font-bold mb-1">{method.data.name}</p>
                             <p>
                               {' '}
                               <a
                                 href={method.data.link}
-                                class='text-purple-600 dark:text-purple-300 hover:text-pink-600 dark:hover:text-pink-300'
+                                class="text-purple-600 dark:text-purple-300 hover:text-pink-600 dark:hover:text-pink-300"
                               >
                                 {method.data.link}
                               </a>

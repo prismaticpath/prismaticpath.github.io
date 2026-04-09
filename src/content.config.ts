@@ -6,7 +6,7 @@ import { rssSchema } from '@astrojs/rss'
 
 // 2. Define your collections
 const blog = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blog" }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
   schema: ({ image }) =>
     rssSchema.extend({
       draft: z.boolean().optional(),
@@ -21,7 +21,7 @@ const blog = defineCollection({
 })
 
 const page = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/page" }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/page' }),
   schema: ({ image }) =>
     z.object({
       draft: z.boolean().optional(),
@@ -37,7 +37,7 @@ const page = defineCollection({
 })
 
 const category = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/category" }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/category' }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -47,7 +47,7 @@ const category = defineCollection({
 })
 
 const author = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/author" }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/author' }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -58,7 +58,7 @@ const author = defineCollection({
 })
 
 const social = defineCollection({
-  loader: glob({ pattern: "**/*.json", base: "./src/content/social" }),
+  loader: glob({ pattern: '**/*.json', base: './src/content/social' }),
   schema: z.object({
     name: z.string(),
     link: z.string(),
