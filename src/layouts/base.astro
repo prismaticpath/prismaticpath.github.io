@@ -14,18 +14,18 @@ const { frontmatter } = Astro.props
 ---
 
 <!doctype html>
-<html lang='en'>
+<html lang="en">
   <head>
-    <meta charset='UTF-8' />
-    <meta http-equiv='Referrer-Policy' content='no-referrer, strict-origin-when-cross-origin' />
-    <meta name='viewport' content='width=device-width' />
-    <link rel='icon' href={`${Astro.site}favicon.ico`} sizes='any' />
-    <link rel='icon' href={`${Astro.site}favicon.svg`} type='image/svg+xml' />
-    <link rel='apple-touch-icon' href={`${Astro.site}apple-touchicon.png`} />
-    <link rel='manifest' href={`${Astro.site}site.webmanifest`} />
-    <link rel='sitemap' href={`${Astro.site}sitemap-indexxml`} />
-    <link rel='alternate' type='application/rss+xml' title='RSS' href={`${Astro.site}rss.xml`} />
-    <meta name='generator' content={Astro.generator} />
+    <meta charset="UTF-8" />
+    <meta http-equiv="Referrer-Policy" content="no-referrer, strict-origin-when-cross-origin" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href={`${Astro.site}favicon.ico`} sizes="any" />
+    <link rel="icon" href={`${Astro.site}favicon.svg`} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={`${Astro.site}apple-touchicon.png`} />
+    <link rel="manifest" href={`${Astro.site}site.webmanifest`} />
+    <link rel="sitemap" href={`${Astro.site}sitemap-indexxml`} />
+    <link rel="alternate" type="application/rss+xml" title="RSS" href={`${Astro.site}rss.xml`} />
+    <meta name="generator" content={Astro.generator} />
     <SEO frontmatter={frontmatter} />
     <script is:inline>
       const setDarkMode = () => {
@@ -46,14 +46,14 @@ const { frontmatter } = Astro.props
         display: none !important;
       }
     </style>
-    <slot name='in-head' />
+    <slot name="in-head" />
   </head>
-  <body class='dark:bg-gray-900'>
+  <body class="dark:bg-gray-900">
     <Header />
     <slot />
     {frontmatter.gallery && <Gallery folder={frontmatter.gallery} />}
     {frontmatter.images && <Images images={frontmatter.images} />}
-    <slot name='before-footer' />
+    <slot name="before-footer" />
     <Footer />
   </body>
 </html>
