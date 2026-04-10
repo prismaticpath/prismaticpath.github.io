@@ -5,7 +5,16 @@ import Search from '../components/search.astro'
 
 <style>
   .rainbow-text {
-    background: linear-gradient(90deg, #ff0080, #ff8c00, #ffe100, #00c800, #00bfff, #9b59b6, #ff0080);
+    background: linear-gradient(
+      90deg,
+      #ff0080,
+      #ff8c00,
+      #ffe100,
+      #00c800,
+      #00bfff,
+      #9b59b6,
+      #ff0080
+    );
     background-size: 300% 100%;
     -webkit-background-clip: text;
     background-clip: text;
@@ -16,13 +25,20 @@ import Search from '../components/search.astro'
     font-family: 'Noto Sans', sans-serif;
   }
   @keyframes rainbow-shift {
-    0%   { background-position: 0% 50% }
-    100% { background-position: 300% 50% }
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 300% 50%;
+    }
   }
 </style>
 
 <div class="h-16 w-full relative">
-  <nav x-data="{ isOpen: false }" style="background: rgba(10,10,20,0.6); backdrop-filter: blur(12px);">
+  <nav
+    x-data="{ isOpen: false }"
+    style="background: rgba(10,10,20,0.6); backdrop-filter: blur(12px);"
+  >
     <div
       class="mx-auto px-2 w-full fixed z-50 lg:px-8 sm:px-6"
       style="background: rgba(10,10,20,0.6); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.1);"

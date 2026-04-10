@@ -37,14 +37,32 @@ const { frontmatter } = Astro.props
       [x-cloak] {
         display: none !important;
       }
-      @keyframes fade-in  { from { opacity: 0 } to { opacity: 1 } }
-      @keyframes fade-out { from { opacity: 1 } to { opacity: 0 } }
-      ::view-transition-old(root) { animation: fade-out 300ms ease }
-      ::view-transition-new(root) { animation: fade-in  300ms ease }
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes fade-out {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+      ::view-transition-old(root) {
+        animation: fade-out 300ms ease;
+      }
+      ::view-transition-new(root) {
+        animation: fade-in 300ms ease;
+      }
     </style>
     <slot name="in-head" />
   </head>
-  <body class="bg-gray-950 text-white">
+  <body class="text-white bg-gray-950">
     <Header />
     <slot />
     {frontmatter.gallery && <Gallery folder={frontmatter.gallery} />}

@@ -35,13 +35,15 @@ if (post.data.author) {
     border-radius: 0.75rem;
     aspect-ratio: 3 / 4;
     min-height: 20rem;
-    transition: transform 300ms ease, box-shadow 300ms ease;
+    transition:
+      transform 300ms ease,
+      box-shadow 300ms ease;
     display: block;
     text-decoration: none;
   }
   .blog-card:hover {
     transform: scale(1.02);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
   }
   .blog-card-image {
     position: absolute;
@@ -53,7 +55,12 @@ if (post.data.author) {
   .blog-card-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.4) 55%, rgba(0,0,0,0.05) 100%);
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.88) 0%,
+      rgba(0, 0, 0, 0.4) 55%,
+      rgba(0, 0, 0, 0.05) 100%
+    );
     z-index: 1;
   }
   .blog-card-content {
@@ -78,7 +85,7 @@ if (post.data.author) {
     gap: 0.5rem;
     font-family: 'Noto Sans', sans-serif;
     font-size: 0.7rem;
-    color: rgba(255,255,255,0.7);
+    color: rgba(255, 255, 255, 0.7);
     align-items: center;
   }
 </style>
@@ -100,24 +107,30 @@ if (post.data.author) {
     {post.data.categories && <Categories categories={post.data.categories} />}
     <h2 class="blog-card-title">{post.data.title}</h2>
     <div class="blog-card-meta">
-      {post.data.pubDate && (
-        <span class="flex items-center gap-1">
-          <span class="i-heroicons-calendar-days h-3 w-3"></span>
-          {post.data.pubDate.toDateString()}
-        </span>
-      )}
-      {post.data.minutesRead && (
-        <span class="flex items-center gap-1">
-          <span class="i-heroicons-clock h-3 w-3"></span>
-          {post.data.minutesRead}
-        </span>
-      )}
-      {post.data.author && (
-        <span class="flex items-center gap-1">
-          <span class="i-heroicons-user-circle h-3 w-3"></span>
-          {author!.data.title}
-        </span>
-      )}
+      {
+        post.data.pubDate && (
+          <span class="flex gap-1 items-center">
+            <span class="i-heroicons-calendar-days h-3 w-3" />
+            {post.data.pubDate.toDateString()}
+          </span>
+        )
+      }
+      {
+        post.data.minutesRead && (
+          <span class="flex gap-1 items-center">
+            <span class="i-heroicons-clock h-3 w-3" />
+            {post.data.minutesRead}
+          </span>
+        )
+      }
+      {
+        post.data.author && (
+          <span class="flex gap-1 items-center">
+            <span class="i-heroicons-user-circle h-3 w-3" />
+            {author!.data.title}
+          </span>
+        )
+      }
     </div>
     <Tags tags={post.data.tags} />
   </div>

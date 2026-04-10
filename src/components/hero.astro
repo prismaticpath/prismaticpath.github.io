@@ -4,7 +4,16 @@ import { SiteMetadata } from '../config'
 
 <style>
   .rainbow-title {
-    background: linear-gradient(90deg, #ff0080, #ff8c00, #ffe100, #00c800, #00bfff, #9b59b6, #ff0080);
+    background: linear-gradient(
+      90deg,
+      #ff0080,
+      #ff8c00,
+      #ffe100,
+      #00c800,
+      #00bfff,
+      #9b59b6,
+      #ff0080
+    );
     background-size: 300% 100%;
     -webkit-background-clip: text;
     background-clip: text;
@@ -17,29 +26,38 @@ import { SiteMetadata } from '../config'
     font-size: clamp(3rem, 10vw, 8rem);
   }
   @keyframes rainbow-shift {
-    0%   { background-position: 0% 50% }
-    100% { background-position: 300% 50% }
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 300% 50%;
+    }
   }
 </style>
 
 <section class="relative overflow-hidden" style="background: #05050f;">
-  <div class="mx-auto max-w-7xl px-4 pt-20 pb-16 lg:px-8 sm:px-6 flex flex-col items-center text-center">
+  <div
+    class="mx-auto px-4 pb-16 pt-20 text-center flex flex-col max-w-7xl items-center lg:px-8 sm:px-6"
+  >
     <h1 class="rainbow-title">
       {SiteMetadata.title}
     </h1>
-    <p class="text-gray-300 mt-6 max-w-2xl text-lg leading-relaxed" style="font-family: 'Noto Serif', serif;">
+    <p
+      class="text-lg text-gray-300 leading-relaxed mt-6 max-w-2xl"
+      style="font-family: 'Noto Serif', serif;"
+    >
       {SiteMetadata.description}
     </p>
     <div class="mt-8 flex gap-4">
       <a
         href="/about"
-        class="text-white font-medium px-8 py-3 rounded-md bg-purple-700 hover:bg-pink-600 transition-colors duration-200"
+        class="text-white font-medium px-8 py-3 rounded-md bg-purple-700 transition-colors duration-200 hover:bg-pink-600"
       >
         About
       </a>
       <a
         href="https://github.com/sponsors/hellotham"
-        class="text-purple-200 font-medium px-8 py-3 rounded-md bg-purple-900 hover:bg-pink-900 transition-colors duration-200"
+        class="text-purple-200 font-medium px-8 py-3 rounded-md bg-purple-900 transition-colors duration-200 hover:bg-pink-900"
         rel="noopener noreferrer"
         target="_blank"
       >
