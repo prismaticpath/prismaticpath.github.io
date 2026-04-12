@@ -16,5 +16,8 @@
   "files.associations": {
     "*.mdoc": "markdown"
   },
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "chat.tools.terminal.autoApprove": {
+    "pnpm": true
+  }
 }

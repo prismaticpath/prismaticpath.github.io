@@ -4,6 +4,8 @@ import type { CollectionEntry } from 'astro:content'
 import { getEntry } from 'astro:content'
 import Base from '../layouts/base.astro'
 import NextPrev from '../components/nextprev.astro'
+import Categories from '../components/categories.astro'
+import Tags from '../components/tags.astro'
 
 export interface Props {
   post: CollectionEntry<'blog'>
@@ -16,72 +18,94 @@ let author = await getEntry('author', 'default')
 if (post.data.author) {
   author = await getEntry(post.data.author)
 }
+let cat = await getEntry('category', 'general')
+if (post.data.categories) {
+  cat = await getEntry(post.data.categories[0])
+}
+const heroImage = post.data.image || (post.data.images && post.data.images[0]) || cat!.data.image
 ---
 
 <Base frontmatter={post.data}>
-  <main class="dark:bg-black">
-    <article class="post">
-      <header class="body-font text-gray-600">
-        <div class="mx-auto px-5 py-6 container flex flex-col items-center justify-center">
-          <div class="text-center w-full lg:w-2/3">
-            <h1
-              class="title-font text-4xl text-gray-900 font-medium mb-4 sm:text-4xl dark:text-gray-200"
-            >
-              {post.data.title}
-            </h1>
-            <p class="leading-relaxed mb-8">{post.data.description}</p>
-          </div>
-          {
-            post.data.image && (
-              <Image
-                class="mb-10 rounded w-5/6 object-contain object-center lg:w-3/6 xl:w-2/6"
-                alt="hero"
-                src={post.data.image}
-              />
-            )
-          }
-          <span class="flex">
+  <main transition:animate="fade">
+    <article class="relative isolate">
+      <!-- Full-viewport hero -->
+      <Image
+        src={heroImage}
+        alt={post.data.title ?? ''}
+        class="absolute inset-0 z-0 h-full w-full object-contain"
+      />
+      <div class="absolute inset-0 z-1 bg-black/58"></div>
+
+      <header class="relative z-2 flex min-h-screen flex-col items-center justify-center overflow-hidden p-8 text-center">
+        <div class="relative z-2 flex max-w-3xl flex-col items-center gap-4">
+          {post.data.categories && <Categories categories={post.data.categories} />}
+          <h1 class="m-0 font-serif text-[clamp(2rem,6vw,5rem)] leading-[1.15] text-white font-bold [text-shadow:0_2px_16px_rgba(0,0,0,0.8)]">
+            {post.data.title}
+          </h1>
+          {post.data.description && (
+            <p class="m-0 font-serif text-[clamp(1rem,2vw,1.4rem)] text-white/85 [text-shadow:0_1px_8px_rgba(0,0,0,0.7)]">
+              {post.data.description}
+            </p>
+          )}
+          <div class="flex flex-wrap justify-center gap-4 text-sm text-white/75 font-sans">
             {
               post.data.author && (
-                <span class="mr-6 flex items-center">
+                <span class="flex items-center gap-1">
                   <Image
                     src={author!.data.image}
                     alt={author!.data.title}
-                    class="mr-2 rounded-full h-10 w-10 object-cover"
+                    class="rounded-full object-cover"
+                    width={28}
+                    height={28}
                   />
-                  <span class="text-purple-500 font-semibold dark:text-purple-300">
-                    {author!.data.title}
-                  </span>
+                  <span>{author!.data.title}</span>
                 </span>
               )
             }
             {
               post.data.pubDate && (
-                <span class="mr-6 flex items-center">
-                  <div class="i-heroicons-calendar-days text-purple-500 mr-1 h-6 w-6 dark:text-purple-300" />
-                  <span class="text-purple-500 font-semibold ml-1 dark:text-purple-300">
-                    {new Date(post.data.pubDate).toDateString()}
-                  </span>
+                <span class="flex items-center gap-1">
+                  <span class="i-heroicons-calendar-days h-4 w-4" />
+                  <span>{new Date(post.data.pubDate).toDateString()}</span>
                 </span>
               )
             }
             {
               post.data.minutesRead && (
-                <span class="flex items-center">
-                  <div class="i-heroicons-clock text-purple-500 mr-1 h-6 w-6 dark:text-purple-300" />
-                  <span class="text-purple-500 font-semibold ml-1 dark:text-purple-300">
-                    {post.data.minutesRead}
-                  </span>
+                <span class="flex items-center gap-1">
+                  <span class="i-heroicons-clock h-4 w-4" />
+                  <span>{post.data.minutesRead}</span>
                 </span>
               )
             }
-          </span>
+          </div>
+          {post.data.tags && <Tags tags={post.data.tags} />}
+        </div>
+        <div
+          class="pointer-events-none absolute bottom-8 left-1/2 z-2 flex -translate-x-1/2 animate-bounce flex-col items-center gap-1 text-[0.7rem] tracking-[0.1em] text-white/50 font-sans"
+          aria-hidden="true"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+          </svg>
+          <span>READ</span>
         </div>
       </header>
-      <section
-        class="lg:prose-3xl mx-auto px-4 max-w-screen-lg prose prose-gray lg:px-0 dark:prose-invert"
-      >
-        <slot />
+
+      <!-- Article body sits on top of fixed image as reader scrolls -->
+      <section class="relative z-10">
+        <div
+          class="mx-auto max-w-[65ch] prose prose-invert prose-p:text-slate-100/95 prose-li:text-slate-100/95 prose-blockquote:text-slate-100/95 rounded-2xl border border-white/12 bg-[rgba(5,7,12,0.5)] px-4 py-[clamp(1.2rem,2vw,2rem)] text-[rgba(250,252,255,0.96)] [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] shadow-[0_22px_42px_rgba(0,0,0,0.42)] lg:px-4 font-sans leading-[1.8]"
+        >
+          <slot />
+        </div>
       </section>
     </article>
   </main>

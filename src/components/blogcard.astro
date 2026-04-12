@@ -28,58 +28,110 @@ if (post.data.author) {
 }
 ---
 
-<section class="p-4 lg:w-1/4 md:w-1/3 xl:w-1/5">
-  <div
-    class="p-2 border-1 border-gray-200 rounded-lg bg-white h-full shadow-xl overflow-hidden dark:border-gray-700 dark:bg-gray-800"
-  >
-    <a href={`${import.meta.env.BASE_URL}` + 'blog/' + post.id}>
-      <Image
-        src={image}
-        alt={post.data.title + ' featured image'}
-        class="rounded-lg bg-purple-100 h-64 w-full relative overflow-hidden object-contain object-center dark:bg-purple-800 group-hover:opacity-75"
-      />
-      <p class="sr-only">{post.data.title}</p>
-    </a>
-    <div class="p-6">
-      {post.data.categories && <Categories categories={post.data.categories} />}
-      <a href={`${import.meta.env.BASE_URL}` + 'blog/' + post.id}>
-        <h1
-          class="title-font text-xl text-purple-600 font-bold mt-2 dark:text-purple-300 hover:text-pink-600 dark:hover:text-pink-300"
-        >
-          {post.data.title}
-        </h1>
-      </a>
-      <div class="flex flex-wrap items-center">
-        {
-          post.data.pubDate && (
-            <span class="text-xs text-gray-500 leading-none mr-3 py-1 pr-3 border-r-2 border-purple-200 inline-flex items-center dark:text-gray-400 dark:border-purple-600">
-              <div class="i-heroicons-calendar-days mr-1 h-4 w-4" />
-              {post.data.pubDate.toDateString()}
-            </span>
-          )
-        }
-        {
-          post.data.minutesRead && (
-            <span class="text-xs text-gray-500 leading-none mr-3 py-1 pr-3 border-r-2 border-purple-200 inline-flex items-center dark:text-gray-400 dark:border-purple-600">
-              <div class="i-heroicons-clock mr-1 h-4 w-4" />
-              {post.data.minutesRead}
-            </span>
-          )
-        }
-        {
-          post.data.author && (
-            <span class="text-rosely1 dark:text-rosely7 text-xs leading-none inline-flex items-center">
-              <div class="i-heroicons-user-circle mr-1 h-4 w-4" />
-              {author!.data.title}
-            </span>
-          )
-        }
-      </div>
+<style>
+  .blog-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    aspect-ratio: 3 / 4;
+    min-height: 20rem;
+    transition:
+      transform 300ms ease,
+      box-shadow 300ms ease;
+    display: block;
+    text-decoration: none;
+  }
+  .blog-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  }
+  .blog-card-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .blog-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.88) 0%,
+      rgba(0, 0, 0, 0.4) 55%,
+      rgba(0, 0, 0, 0.05) 100%
+    );
+    z-index: 1;
+  }
+  .blog-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    padding: 1rem;
+  }
+  .blog-card-title {
+    font-family: 'Noto Serif', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.35;
+    margin: 0.25rem 0 0.4rem;
+  }
+  .blog-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.7);
+    align-items: center;
+  }
+</style>
 
-      <p class="text-sm text-gray-600 mt-3 italic dark:text-gray-300">
-        {post.data.description}
-      </p>
-      <Tags tags={post.data.tags} />
+<a
+  class="blog-card"
+  href={`${import.meta.env.BASE_URL}` + 'blog/' + post.id}
+  aria-label={post.data.title}
+>
+  <Image
+    src={image}
+    alt={post.data.title + ' featured image'}
+    class="blog-card-image"
+    width={400}
+    height={533}
+  />
+  <div class="blog-card-overlay"></div>
+  <div class="blog-card-content">
+    {post.data.categories && <Categories categories={post.data.categories} />}
+    <h2 class="blog-card-title">{post.data.title}</h2>
+    <div class="blog-card-meta">
+      {
+        post.data.pubDate && (
+          <span class="flex gap-1 items-center">
+            <span class="i-heroicons-calendar-days h-3 w-3" />
+            {post.data.pubDate.toDateString()}
+          </span>
+        )
+      }
+      {
+        post.data.minutesRead && (
+          <span class="flex gap-1 items-center">
+            <span class="i-heroicons-clock h-3 w-3" />
+            {post.data.minutesRead}
+          </span>
+        )
+      }
+      {
+        post.data.author && (
+          <span class="flex gap-1 items-center">
+            <span class="i-heroicons-user-circle h-3 w-3" />
+            {author!.data.title}
+          </span>
+        )
+      }
     </div>
+    <Tags tags={post.data.tags} />
   </div>
-</section>
+</a>

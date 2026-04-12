@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from 'astro:content'
-import BlogCard from '../components/blogcard.astro'
 
 export interface Props {
   posts: CollectionEntry<'blog'>[]
@@ -9,6 +8,110 @@ export interface Props {
 const { posts } = Astro.props
 ---
 
-<div class="flex flex-wrap space-y-12 dark:bg-gray-900 lg:space-y-0">
-  {posts.map((post) => <BlogCard post={post} />)}
+<style>
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  @media (min-width: 640px) {
+    .post-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .post-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .post-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .post-tile {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    padding: 1rem;
+    background: linear-gradient(145deg, #0a0f1f 0%, #102948 45%, #1a4c77 100%);
+    transition: filter 220ms ease;
+  }
+
+  .post-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .post-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(to bottom, rgba(4, 7, 12, 0.25) 0%, rgba(4, 7, 12, 0.7) 100%);
+  }
+
+  .post-tile:nth-child(3n + 2) {
+    background: linear-gradient(145deg, #190f2c 0%, #31215c 45%, #5a3f91 100%);
+  }
+
+  .post-tile:nth-child(3n + 3) {
+    background: linear-gradient(145deg, #151616 0%, #28403e 45%, #2b6c61 100%);
+  }
+
+  .post-tile:hover,
+  .post-tile:focus-visible {
+    filter: brightness(1.12) saturate(1.15);
+  }
+
+  .post-title {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    color: #f7fbff;
+    font-family: 'Noto Serif', serif;
+    font-size: clamp(1rem, 2.2vw, 1.6rem);
+    line-height: 1.15;
+    text-wrap: balance;
+    text-shadow: 0 0 18px rgba(0, 0, 0, 0.35);
+  }
+</style>
+
+<div class="bg-gray-950">
+  <div class="post-grid">
+    {
+      posts.map((post) => {
+        const featuredImage = post.data.image || post.data.images?.[0]
+
+        return (
+          <a class="post-tile" href={`${import.meta.env.BASE_URL}` + 'blog/' + post.id} aria-label={post.data.title}>
+            {featuredImage && (
+              <img
+                class="post-image"
+                src={featuredImage.src}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                decoding="async"
+              />
+            )}
+            <div class="post-overlay" aria-hidden="true"></div>
+            <h2 class="post-title">{post.data.title}</h2>
+          </a>
+        )
+      })
+    }
+  </div>
 </div>

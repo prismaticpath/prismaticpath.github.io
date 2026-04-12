@@ -48,8 +48,7 @@ export default defineConfig([
         parser: tsParser,
         extraFileExtensions: ['.astro'],
         sourceType: 'module',
-        ecmaVersion: 'latest',
-        project: './tsconfig.json'
+        ecmaVersion: 'latest'
       }
     },
     rules: {
