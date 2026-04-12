@@ -4,11 +4,9 @@ import { getCollection } from 'astro:content'
 const social = await getCollection('social')
 ---
 
-<div class="h-24 lg:h-16"></div>
-<footer class="text-gray-400">
+<footer class="text-gray-300 border-t border-violet-400/30 bg-gray-950/65 backdrop-blur-sm">
   <div
-    class="px-4 py-1 bg-gray-950 flex flex-col w-full items-center inset-x-0 bottom-0 fixed z-20 lg:px-8 lg:py-4 lg:flex-row"
-    style="border-top: 1px solid rgba(139,92,246,0.3);"
+    class="mx-auto px-4 py-3 flex flex-col w-full items-center lg:px-8 lg:py-4 lg:flex-row"
   >
     <span class="flex flex-none flex-row items-center">
       <a
@@ -18,7 +16,7 @@ const social = await getCollection('social')
         <span class="sr-only">Home</span>
       </a>
       <p
-        class="text-sm text-gray-400 ml-2 py-1 pl-2"
+        class="text-sm text-gray-300 ml-2 py-1 pl-2"
         style="border-left: 2px solid rgba(139,92,246,0.5);"
       >
         © {new Date().getFullYear()} MIT licence
@@ -34,7 +32,7 @@ const social = await getCollection('social')
     </span>
     <span class="flex flex-none flex-row items-center">
       <p
-        class="text-sm text-gray-400 lg:ml-4 lg:py-1 lg:pl-4"
+        class="text-sm text-gray-300 lg:ml-4 lg:py-1 lg:pl-4"
         style="border-left: 2px solid rgba(139,92,246,0.5);"
       >
         <a
@@ -45,7 +43,7 @@ const social = await getCollection('social')
         </a>
       </p>
       <p
-        class="text-sm text-gray-400 ml-4 py-1 pl-4"
+        class="text-sm text-gray-300 ml-4 py-1 pl-4"
         style="border-left: 2px solid rgba(139,92,246,0.5);"
       >
         <a
@@ -58,7 +56,7 @@ const social = await getCollection('social')
         </a>
       </p>
       <p
-        class="text-sm text-gray-400 ml-4 py-1 pl-4"
+        class="text-sm text-gray-300 ml-4 py-1 pl-4"
         style="border-left: 2px solid rgba(139,92,246,0.5);"
       >
         <a

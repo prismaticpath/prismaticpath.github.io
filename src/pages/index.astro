@@ -3,7 +3,7 @@ import type { CollectionEntry } from 'astro:content'
 import { getCollection } from 'astro:content'
 import { SiteMetadata } from '../config'
 import Base from '../layouts/base.astro'
-import PrismScene from '../components/PrismScene.astro'
+import HomeHero from '../components/homehero.astro'
 import BlogRoll from '../components/blogroll.astro'
 import image from '../assets/images/2020/08/DSC_5380-Edit_o.jpeg'
 
@@ -22,6 +22,6 @@ const latestPosts = posts.sort((a, b) =>
 ---
 
 <Base frontmatter={frontmatter}>
-  <PrismScene posts={latestPosts} baseUrl={`${import.meta.env.BASE_URL}`} />
+  <HomeHero />
   <BlogRoll posts={latestPosts} />
 </Base>

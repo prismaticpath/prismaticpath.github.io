@@ -1,0 +1,145 @@
+---
+import prism from '../assets/images/prism.svg'
+
+const title = 'Prismatic Path'
+const rainbowPalette = ['#ff2a2a', '#ff8a00', '#ffd400', '#45d544', '#00c8ff', '#3f6dff', '#8b4dff']
+const titleLetters = [...title].map((char, index) => {
+  const phase = index % rainbowPalette.length
+  const phaseColors = rainbowPalette.map(
+    (_, i) => rainbowPalette[(phase + i) % rainbowPalette.length]
+  )
+
+  return {
+    char,
+    duration: `${8 + (index % 6)}s`,
+    delay: `${index * -0.55}s`,
+    phaseColors
+  }
+})
+---
+
+<style>
+  .home-hero {
+    position: relative;
+    overflow: hidden;
+    background: #05050a;
+    min-height: clamp(22rem, 60vh, 34rem);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .hero-background {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+    transform: scale(1.03);
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(5, 5, 10, 0.35), rgba(5, 5, 10, 0.65));
+  }
+
+  .hero-title-wrap {
+    position: relative;
+    z-index: 2;
+    width: min(92vw, 72rem);
+    padding-top: clamp(1.5rem, 5vw, 3rem);
+    text-align: center;
+  }
+
+  .hero-title {
+    margin: 0;
+    font-family: 'Noto Sans', serif;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1;
+    font-size: clamp(2rem, 8vw, 6rem);
+    display: inline-flex;
+    justify-content: center;
+    gap: 0;
+    text-shadow: 0 0 24px rgba(255, 255, 255, 0.18);
+  }
+
+  .hero-letter {
+    display: block;
+    margin-left: -0.08em;
+    color: var(--c0);
+    animation: letter-rainbow var(--duration) linear infinite;
+    animation-delay: var(--delay);
+    will-change: color;
+  }
+
+  .hero-letter:first-child {
+    margin-left: 0;
+  }
+
+  .hero-space {
+    width: 0.2em;
+    margin-left: 0;
+  }
+
+  @keyframes letter-rainbow {
+    0% {
+      color: var(--c0);
+    }
+    14% {
+      color: var(--c1);
+    }
+    28% {
+      color: var(--c2);
+    }
+    42% {
+      color: var(--c3);
+    }
+    57% {
+      color: var(--c4);
+    }
+    71% {
+      color: var(--c5);
+    }
+    85% {
+      color: var(--c6);
+    }
+    100% {
+      color: var(--c0);
+    }
+  }
+</style>
+
+<section class="home-hero" aria-label="Prismatic Path hero">
+  <img
+    class="hero-background"
+    src={prism.src}
+    alt=""
+    aria-hidden="true"
+    loading="eager"
+    decoding="async"
+  />
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-title-wrap">
+    <h1 class="hero-title" aria-label={title}>
+      {
+        titleLetters.map(({ char, duration, delay, phaseColors }) =>
+          char === ' ' ? (
+            <span class="hero-letter hero-space" aria-hidden="true">
+              &nbsp;
+            </span>
+          ) : (
+            <span
+              class="hero-letter"
+              style={`--c0: ${phaseColors[0]}; --c1: ${phaseColors[1]}; --c2: ${phaseColors[2]}; --c3: ${phaseColors[3]}; --c4: ${phaseColors[4]}; --c5: ${phaseColors[5]}; --c6: ${phaseColors[6]}; --duration: ${duration}; --delay: ${delay};`}
+            >
+              {char}
+            </span>
+          )
+        )
+      }
+    </h1>
+  </div>
+</section>

@@ -25,127 +25,32 @@ if (post.data.categories) {
 const heroImage = post.data.image || (post.data.images && post.data.images[0]) || cat!.data.image
 ---
 
-<style>
-  .post-hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 2rem;
-    overflow: hidden;
-  }
-  .post-hero-bg {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
-  }
-  .post-hero-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.58);
-    z-index: 1;
-  }
-  .post-hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 48rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-  .post-hero-title {
-    font-family: 'Noto Serif', serif;
-    font-size: clamp(2rem, 6vw, 5rem);
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.15;
-    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.8);
-    margin: 0;
-  }
-  .post-hero-description {
-    font-family: 'Noto Serif', serif;
-    font-size: clamp(1rem, 2vw, 1.4rem);
-    color: rgba(255, 255, 255, 0.85);
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
-    margin: 0;
-  }
-  .post-hero-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-    font-family: 'Noto Sans', sans-serif;
-    font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.75);
-  }
-  .post-hero-meta-item {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-  }
-  .scroll-hint {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
-    color: rgba(255, 255, 255, 0.5);
-    font-family: 'Noto Sans', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    animation: bounce 2s ease-in-out infinite;
-    pointer-events: none;
-  }
-  @keyframes bounce {
-    0%,
-    100% {
-      transform: translateX(-50%) translateY(0);
-    }
-    50% {
-      transform: translateX(-50%) translateY(6px);
-    }
-  }
-  .post-body {
-    position: relative;
-    z-index: 10;
-    background: #0a0a0f;
-    padding-top: 4rem;
-    padding-bottom: 6rem;
-  }
-</style>
-
 <Base frontmatter={post.data}>
   <main transition:animate="fade">
-    <article class="post">
+    <article class="relative isolate">
       <!-- Full-viewport hero -->
-      <header class="post-hero">
-        <Image
-          src={heroImage}
-          alt={post.data.title ?? ''}
-          class="post-hero-bg"
-          width={1920}
-          height={1080}
-        />
-        <div class="post-hero-overlay"></div>
-        <div class="post-hero-content">
+      <Image
+        src={heroImage}
+        alt={post.data.title ?? ''}
+        class="absolute inset-0 z-0 h-full w-full object-contain"
+      />
+      <div class="absolute inset-0 z-1 bg-black/58"></div>
+
+      <header class="relative z-2 flex min-h-screen flex-col items-center justify-center overflow-hidden p-8 text-center">
+        <div class="relative z-2 flex max-w-3xl flex-col items-center gap-4">
           {post.data.categories && <Categories categories={post.data.categories} />}
-          <h1 class="post-hero-title">{post.data.title}</h1>
-          {post.data.description && <p class="post-hero-description">{post.data.description}</p>}
-          <div class="post-hero-meta">
+          <h1 class="m-0 font-serif text-[clamp(2rem,6vw,5rem)] leading-[1.15] text-white font-bold [text-shadow:0_2px_16px_rgba(0,0,0,0.8)]">
+            {post.data.title}
+          </h1>
+          {post.data.description && (
+            <p class="m-0 font-serif text-[clamp(1rem,2vw,1.4rem)] text-white/85 [text-shadow:0_1px_8px_rgba(0,0,0,0.7)]">
+              {post.data.description}
+            </p>
+          )}
+          <div class="flex flex-wrap justify-center gap-4 text-sm text-white/75 font-sans">
             {
               post.data.author && (
-                <span class="post-hero-meta-item">
+                <span class="flex items-center gap-1">
                   <Image
                     src={author!.data.image}
                     alt={author!.data.title}
@@ -159,7 +64,7 @@ const heroImage = post.data.image || (post.data.images && post.data.images[0]) |
             }
             {
               post.data.pubDate && (
-                <span class="post-hero-meta-item">
+                <span class="flex items-center gap-1">
                   <span class="i-heroicons-calendar-days h-4 w-4" />
                   <span>{new Date(post.data.pubDate).toDateString()}</span>
                 </span>
@@ -167,7 +72,7 @@ const heroImage = post.data.image || (post.data.images && post.data.images[0]) |
             }
             {
               post.data.minutesRead && (
-                <span class="post-hero-meta-item">
+                <span class="flex items-center gap-1">
                   <span class="i-heroicons-clock h-4 w-4" />
                   <span>{post.data.minutesRead}</span>
                 </span>
@@ -176,7 +81,10 @@ const heroImage = post.data.image || (post.data.images && post.data.images[0]) |
           </div>
           {post.data.tags && <Tags tags={post.data.tags} />}
         </div>
-        <div class="scroll-hint" aria-hidden="true">
+        <div
+          class="pointer-events-none absolute bottom-8 left-1/2 z-2 flex -translate-x-1/2 animate-bounce flex-col items-center gap-1 text-[0.7rem] tracking-[0.1em] text-white/50 font-sans"
+          aria-hidden="true"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6"
@@ -192,10 +100,9 @@ const heroImage = post.data.image || (post.data.images && post.data.images[0]) |
       </header>
 
       <!-- Article body sits on top of fixed image as reader scrolls -->
-      <section class="post-body">
+      <section class="relative z-10">
         <div
-          class="mx-auto px-4 max-w-prose prose prose-invert lg:px-0"
-          style="font-family: 'Noto Serif', serif; line-height: 1.8; max-width: 65ch;"
+          class="mx-auto max-w-[65ch] prose prose-invert prose-p:text-slate-100/95 prose-li:text-slate-100/95 prose-blockquote:text-slate-100/95 rounded-2xl border border-white/12 bg-[rgba(5,7,12,0.5)] px-4 py-[clamp(1.2rem,2vw,2rem)] text-[rgba(250,252,255,0.96)] [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] shadow-[0_22px_42px_rgba(0,0,0,0.42)] lg:px-4 font-sans leading-[1.8]"
         >
           <slot />
         </div>
@@ -209,24 +116,3 @@ const heroImage = post.data.image || (post.data.images && post.data.images[0]) |
     next={next}
   />
 </Base>
-
-<script>
-  // Hide fixed hero image once article body scrolls into view
-  const postBody = document.querySelector('.post-body') as HTMLElement | null
-  const overlay = document.querySelector('.post-hero-overlay') as HTMLElement | null
-  const heroBg = document.querySelector('.post-hero-bg') as HTMLElement | null
-
-  if (postBody && overlay && heroBg) {
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        const hidden = entry.isIntersecting
-        overlay.style.transition = 'opacity 400ms ease'
-        heroBg.style.transition = 'opacity 400ms ease'
-        overlay.style.opacity = hidden ? '0' : '1'
-        heroBg.style.opacity = hidden ? '0' : '1'
-      },
-      { threshold: 0.15 }
-    )
-    obs.observe(postBody)
-  }
-</script>
